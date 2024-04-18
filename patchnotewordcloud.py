@@ -16,7 +16,7 @@ def main():
     redditpage = praw.Reddit(client_id=REDDIT_CLIENT_ID, client_secret=REDDIT_CLIENT_SECRET, user_agent=REDDIT_USER_AGENT)
     print(redditpage.read_only)
     url = input("Enter the URL of Reddit Post:")
-    submission = redditpage.submission(url=testurl)
+    submission = redditpage.submission(url=url)
 
     comments = []
     submission.comments.replace_more(limit=None)
@@ -24,7 +24,7 @@ def main():
         comments.append(comment.body)
     
     text = ' '.join(comments)
-    wordcloud = WordCloud(background_color = 'white', max_words=1000, stopwords = STOP_WORDS, width = 2560, height = 1440).generate(text)
+    wordcloud = WordCloud(background_color = 'white', max_words=500, stopwords = STOP_WORDS, width = 2560, height = 1440).generate(text)
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis('off')
     plt.show()
